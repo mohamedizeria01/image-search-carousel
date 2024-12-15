@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Search Carousel</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Set the maximum size for the carousel */
+        .carousel {
+            max-width: 800px; /* Limit the width */
+            max-height: 500px; /* Limit the height */
+            margin: 0 auto; /* Center the carousel */
+        }
+
+        .carousel img {
+            max-width: 100%; /* Ensure images don't exceed container width */
+            max-height: 100%; /* Ensure images don't exceed container height */
+            object-fit: cover; /* Maintain aspect ratio and crop excess */
+        }
+
+        /* Optional: Styling for a cleaner look */
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Search Images</h1>
+
+        <!-- Search Form -->
+        <form action="/" method="POST" class="mb-4">
+            <div class="form-group">
+                <label for="query">Enter your query:</label>
+                <input type="text" class="form-control" id="query" name="query" placeholder="e.g., a red car" required>
+            </div>
+            <div class="form-group">
+                <label for="top_k">Top K Images:</label>
+                <input type="number" class="form-control" id="top_k" name="top_k" min="1" placeholder="e.g., 3" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Search</button>
+        </form>
+
+        {% if top_k_images %}
+            <!-- Bootstrap Carousel -->
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    {% for image in top_k_images %}
+                        <li data-target="#carouselExampleIndicators" data-slide-to="{{ loop.index0 }}" class="{% if loop.first %}active{% endif %}"></li>
+                    {% endfor %}
+                </ol>
+
+                <!-- Slides -->
+                <div class="carousel-inner">
+                    {% for image in top_k_images %}
+                        <div class="carousel-item {% if loop.first %}active{% endif %}">
+                            <img class="d-block w-100" src="{{ url_for('static', filename='images/' + image) }}" alt="Slide {{ loop.index }}">
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Controls -->
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        {% else %}
+            <p class="text-center">No images to display. Please perform a search first.</p>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
