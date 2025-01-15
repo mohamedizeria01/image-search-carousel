@@ -1,0 +1,80 @@
+    /* Sidebar background gradient */
+    .bg-gradient-dark {
+        background: linear-gradient(135deg, #2b2b2b, #1f1f1f);
+    }
+
+    /* Sidebar links */
+    .nav-link {
+        font-size: 1rem;
+        font-weight: 500;
+        transition: background-color 0.3s, transform 0.3s;
+        border-radius: 5px;
+    }
+
+    .nav-link:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: scale(1.05);
+    }
+
+    /* Active link (optional for highlighting the current page) */
+    .nav-link.active {
+        background-color: rgba(255, 255, 255, 0.2);
+        font-weight: 600;
+    }
+
+    /* Sidebar icons */
+    .nav-link i {
+        font-size: 1.2rem;
+    }
+
+    /* Sidebar title */
+    h4 {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+    }
+
+
+
+
+
+    
+    /* Footer Style */
+    footer {
+        background: linear-gradient(90deg, #0056b3, #003766);
+        color: white;
+        width: 100%; /* Ensures it spans the full width */
+        position: relative; /* Adjusts position for layout */
+        bottom: 0; /* Sticks to the bottom */
+        left: 0; /* Aligns it to the left */
+    }
+
+
+
+    #main-content {
+        flex: 1; /* Pushes footer to the bottom */
+    }
+
+    /* Footer Links */
+    footer a {
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 500;
+    }
+
+    footer a:hover {
+        text-decoration: underline;
+        color: #ffffff;
+    }
+
+    /* Footer Icons */
+    footer i {
+        font-size: 1.25rem;
+    }
+
+    /* Responsive Padding */
+    footer .container {
+        padding: 0 15px;
+    }
+
+
+
+    

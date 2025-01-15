@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from transformers import CLIPProcessor, CLIPModel
 from PIL import Image
 import torch
@@ -38,28 +38,52 @@ def semantic_image_search(text_query, image_collection, top_k=3, clip_model=clip
 
     return top_k_images
 
-# Route to handle form submission
+# Route for the main page with sidebar navigation
 @app.route("/", methods=["GET", "POST"])
 def index():
-    if request.method == "POST":
-        # Capture query and top_k from the form
-        text_query = request.form['query']
-        top_k = int(request.form['top_k'])  # Convert top_k to integer
+    # Handle the retrieval system form submission
+    if request.method == "POST" and request.form.get("action") == "retrieval":
+        text_query = request.form["query"]
+        top_k = int(request.form["top_k"])
 
         # Initialize the image collection
-        image_collection = []
-        for filename in os.listdir(images_folder):
-            file_path = os.path.join(images_folder, filename)
-            if file_path.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
-                image_collection.append(file_path)
+        image_collection = [
+            os.path.join(images_folder, filename)
+            for filename in os.listdir(images_folder)
+            if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.webp'))
+        ]
 
         # Run the semantic image search
         top_k_images = semantic_image_search(text_query, image_collection, top_k)
 
-        # Return the results to the template
-        return render_template("index.html", top_k_images=top_k_images)
+        return render_template("index.html", page="retrieval", top_k_images=top_k_images)
 
-    return render_template("index.html", top_k_images=None)
+    # Default rendering for the retrieval system
+    return render_template("index.html", page="retrieval", top_k_images=None)
 
+
+# Route for zero-shot classification
+@app.route("/classify", methods=["POST"])
+def classify():
+    if "image" not in request.files or "classes" not in request.form:
+        return jsonify({"error": "Missing image or classes"}), 400
+
+    image_file = request.files["image"]
+    classes = request.form["classes"].split(",")
+
+    # Preprocess the image
+    image = Image.open(image_file).convert("RGB")
+    inputs = clip_processor(text=classes, images=image, return_tensors="pt", padding=True)
+
+    # Run the CLIP model
+    with torch.no_grad():
+        outputs = clip_model(**inputs)
+        logits_per_image = outputs.logits_per_image
+        probs = logits_per_image.softmax(dim=1).tolist()[0]
+
+    # Prepare classification results
+    result = {cls.strip(): round(prob * 100, 2) for cls, prob in zip(classes, probs)}
+    return jsonify(result)
+                                                                                                                                                                                                                                                                                                   
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,0 +1,69 @@
+#main-content {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+    }
+
+    /* Form Styling */
+    form {
+        background: #ffffff;
+        border: 1px solid #e3e6f0;
+    }
+
+    /* Form Input Fields */
+    .form-control-lg {
+        border-radius: 6px;
+        font-size: 1.1rem;
+    }
+
+    /* Section Header */
+    h2 {
+        font-size: 2rem;
+    }
+
+    /* Carousel Styling */
+    .carousel-inner img {
+        border-radius: 8px;
+    }
+
+    /* Buttons */
+    .btn-primary {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+
+    .btn-primary:hover {
+        background-color: #004085;
+        border-color: #003766;
+    }
+
+
+    
+
+    /* Additional styles to enhance the overall page */
+body {
+    background-color: #f4f7fc;
+    font-family: 'Arial', sans-serif;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.progress-bar {
+    transition: width 0.5s ease;
+}
+
+.form-control-file {
+    font-size: 1rem;
+}
+
+.text-muted {
+    color: #6c757d !important;
+}
+
