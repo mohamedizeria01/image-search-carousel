@@ -14,9 +14,9 @@
 </head>
 
 <body>
-    <div class="d-flex">
+    <div class="d-flex" >
         <!-- Sidebar -->
-        <nav class="vh-200" style="background: linear-gradient(180deg, #0052cc, #81058f); width: 200px; height: 100;">
+        <nav style="background: linear-gradient(180deg, #0052cc, #81058f); width: 200px; height:auto;">
             <div class="d-flex flex-column align-items-center py-4">
                 <h4 class="text-white font-weight-bold mb-4">CLIP</h4>
                 <ul class="nav flex-column w-100">
@@ -33,14 +33,21 @@
                             <span>Zero-Shot Classification</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white py-3 px-4 d-flex align-items-center" href="#classification"
+                            onclick="showSentimentAnalysis()">
+                            <i class="fas fa-smile mr-3"></i>
+                            <span>Sentiment Analysis</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
 
         <!-- Content -->
-        <div class="container my-5 py-4 px-4 pb-5 bg-light rounded shadow-sm" id="main-content">
+        <div class="container mt-5 py-4 px-4 pb-5 bg-light rounded shadow-sm" id="main-content" style="margin-bottom: 230px;">
             {% if page == "retrieval" %}
-            <h2 class="text-center mb-4 text-primary font-weight-bold">Retrieval System</h2>
+            <h2 class="text-center mb-4 pt-5 text-primary font-weight-bold">Retrieval System</h2>
             <div class="row">
                 <!-- Left: Form -->
                 <div class="col-md-6">
@@ -93,11 +100,13 @@
                         </a>
                     </div>
                     {% else %}
-                    <div class="text-center d-flex justify-content-center align-items-center  rounded mx-auto" style="width: 400px; height: 300px; background-color: #9ff3fb; ">
-                        <p class="text-black font-weight-bold m-0 m-5">No images to display. Please perform a search first.</p>
+                    <div class="text-center d-flex justify-content-center align-items-center  rounded mx-auto"
+                        style="width: 400px; height: 300px; background-color: #9ff3fb; ">
+                        <p class="text-black font-weight-bold m-0 m-5">No images to display. Please perform a search
+                            first.</p>
                     </div>
                     {% endif %}
-                    
+
                 </div>
             </div>
             {% endif %}
@@ -105,50 +114,53 @@
     </div>
 
 
-        <!-- Footer -->
-        <footer class="bg-dark text-light py-4 ">
-            <div class="container">
-                <div class="row">
-                    <!-- About -->
-                    <div class="col-md-4">
-                        <h5 class="font-weight-bold text-uppercase">About</h5>
-                        <p>CLIP Retrieval and Classification system leverages advanced AI models to provide powerful
-                            text-to-image retrieval and zero-shot classification capabilities.</p>
-                    </div>
-                    <!-- Useful Links -->
-                    <div class="col-md-4">
-                        <h5 class="font-weight-bold text-uppercase">Useful Links</h5>
-                        <ul class="list-unstyled">
-                            <li><a href="/" class="text-light">Retrieval System</a></li>
-                            <li><a href="#classification" onclick="showClassification()" class="text-light">Zero-Shot
-                                    Classification</a></li>
-                            <li><a href="https://github.com/openai/CLIP" class="text-light" target="_blank">Learn
-                                    about CLIP</a></li>
-                        </ul>
-                    </div>
-                    <!-- Contact -->
-                    <div class="col-md-4">
-                        <h5 class="font-weight-bold text-uppercase">Contact</h5>
-                        <ul class="list-unstyled">
-                            <li><i class="fas fa-envelope mr-2"></i> <a href="mailto:contact@clipsystem.com"
-                                    class="text-light">mohamed.izeria@usmba.ac.ma</a></li>
-                            <li><i class="fas fa-phone mr-2"></i> +212 616943683</li>
-                            <li><i class="fas fa-map-marker-alt mr-2"></i> universite sidi mohamed ben abdellah - fes </li>
-                        </ul>
-                    </div>
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 ">
+        <div class="container">
+            <div class="row">
+                <!-- About -->
+                <div class="col-md-4">
+                    <h5 class="font-weight-bold text-uppercase">About</h5>
+                    <p>CLIP Retrieval and Classification system leverages advanced AI models to provide powerful
+                        text-to-image retrieval and zero-shot classification capabilities and also sentiment analysis .</p>
                 </div>
-                <div class="row mt-4">
-                    <div class="col text-center">
-                        <p class="mb-0">© 2025 CLIP Retrieval System. All Rights Reserved.</p>
-                        <div>
-                            <a href="https://www.instagram.com/mohamed_izri/" class="text-light mx-2"><i class="fab fa-instagram"></i></a>
-                            <a href="https://www.linkedin.com/in/mohamed-izeria-bb50a32ab/" class="text-light mx-2"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="https://github.com/mohamedizeria01" class="text-light mx-2"><i class="fab fa-github"></i></a>
-                        </div>
+                <!-- Useful Links -->
+                <div class="col-md-4">
+                    <h5 class="font-weight-bold text-uppercase">Useful Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/" class="text-light">Retrieval System</a></li>
+                        <li><a href="#classification" onclick="showClassification()" class="text-light">Zero-Shot
+                                Classification</a></li>
+                        <li><a href="https://github.com/openai/CLIP" class="text-light" target="_blank">Learn
+                                about CLIP</a></li>
+                    </ul>
+                </div>
+                <!-- Contact -->
+                <div class="col-md-4">
+                    <h5 class="font-weight-bold text-uppercase">Contact</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope mr-2"></i> <a href="mailto:contact@clipsystem.com"
+                                class="text-light">mohamed.izeria@usmba.ac.ma</a></li>
+                        <li><i class="fas fa-phone mr-2"></i> +212 616943683</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i> universite sidi mohamed ben abdellah - fes </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col text-center">
+                    <p class="mb-0">© 2025 CLIP Retrieval System. All Rights Reserved.</p>
+                    <div>
+                        <a href="https://www.instagram.com/mohamed_izri/" class="text-light mx-2"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/mohamed-izeria-bb50a32ab/" class="text-light mx-2"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/mohamedizeria01" class="text-light mx-2"><i
+                                class="fab fa-github"></i></a>
                     </div>
                 </div>
             </div>
-        </footer>
+        </div>
+    </footer>
 
 
 

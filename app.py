@@ -11,7 +11,7 @@ clip_model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
 clip_processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
 
 # Path to the folder containing the images
-images_folder = r"C:\Users\hp\Desktop\projet\static\images"
+images_folder = r"C:\Users\hp\Desktop\applicaion_web\static\images"
 
 # Function for semantic image search
 def semantic_image_search(text_query, image_collection, top_k=3, clip_model=clip_model, clip_processor=clip_processor):
@@ -84,6 +84,36 @@ def classify():
     # Prepare classification results
     result = {cls.strip(): round(prob * 100, 2) for cls, prob in zip(classes, probs)}
     return jsonify(result)
+
+
+
+# Route for zero-shot classification
+@app.route("/sentiment", methods=["POST"])
+def sentiment_analysis():
+    if "image" not in request.files or "classes" not in request.form:
+        return jsonify({"error": "Missing image or classes"}), 400
+
+    image_file = request.files["image"]
+    classes = "happy face ,neutral face ,sad face".split(",")
+
+    # Preprocess the image
+    image = Image.open(image_file).convert("RGB")
+    inputs = clip_processor(text=classes, images=image, return_tensors="pt", padding=True)
+
+
+    # Run the CLIP model
+    with torch.no_grad():
+        outputs = clip_model(**inputs)
+        logits_per_image = outputs.logits_per_image
+        probs = logits_per_image.softmax(dim=1).tolist()[0]
+
+    # Prepare classification results
+    result = {cls.strip(): round(prob * 100, 2) for cls, prob in zip(classes, probs)}
+    return jsonify(result)
+
+
+
+
                                                                                                                                                                                                                                                                                                    
 if __name__ == "__main__":
     app.run(debug=True)
